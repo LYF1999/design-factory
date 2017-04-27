@@ -109,3 +109,11 @@ fabric.properties
 # Django
 *.pyc
 localsettings.py
+
+
+# production
+dist/
+
+# misc
+.DS_Store
+
