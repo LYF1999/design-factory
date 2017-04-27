@@ -8,7 +8,6 @@ const Example = () => {
   );
 };
 
-Example.propTypes = {
-};
+Example.propTypes = {};
 
 export default Example;

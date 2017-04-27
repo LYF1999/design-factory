@@ -105,3 +105,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+# Django
+*.pyc
+localsettings.py
