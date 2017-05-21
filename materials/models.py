@@ -13,9 +13,3 @@ class Material(models.Model):
     type = models.IntegerField('类型', choices=MATERIAL_TYPE_CHOICE, default=MaterialType.MATERIAL)
     description = models.TextField()
     created_at = models.DateTimeField(u'创建时间', auto_now_add=True)
-
-
-class File(models.Model):
-    file = models.FileField(upload_to='files/')
-    material = models.ForeignKey(Material)
-    created_at = models.DateTimeField(u'创建时间', auto_now_add=True)
