@@ -2,7 +2,7 @@
 from django.contrib.auth import login, authenticate, logout
 
 from ratelimit.decorators import ratelimit
-from rest_framework import viewsets
+from rest_framework import viewsets, views
 from rest_framework.decorators import list_route
 from rest_framework.mixins import RetrieveModelMixin
 

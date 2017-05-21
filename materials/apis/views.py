@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from rest_framework import viewsets
+from rest_framework.filters import DjangoFilterBackend
 
 from materials.apis.paginations import MaterialPagination
 from materials.apis.permissions import MaterialPermission
@@ -15,3 +16,5 @@ class MaterialViewSet(viewsets.ModelViewSet):
     serializer_class = MaterialSerializer
     pagination_class = MaterialPagination
     permission_classes = (MaterialPermission,)
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['type']

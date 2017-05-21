@@ -10,6 +10,7 @@ from users.models import User
 class Material(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField('标题', max_length=255)
+    cover = models.ImageField('封面', upload_to='cover/', null=True, blank=True)
     type = models.IntegerField('类型', choices=MATERIAL_TYPE_CHOICE, default=MaterialType.MATERIAL)
     description = models.TextField()
     created_at = models.DateTimeField(u'创建时间', auto_now_add=True)

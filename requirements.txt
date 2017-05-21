@@ -11,3 +11,4 @@ bootstrap-admin==0.3.7.1
 pylibmc==1.5.1
 django-ratelimit==1.0.1
 raven==6.0.0
+django-filter==1.0.4

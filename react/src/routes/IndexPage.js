@@ -1,21 +1,299 @@
-import React from 'react';
-import { connect } from 'dva';
-import styles from './IndexPage.css';
+import React, { PropTypes } from 'react';
+import { Link, Route } from 'react-router-dom';
+import { Icon, Carousel, Button, Modal, message } from 'antd';
+import { observer } from 'mobx-react';
 
-function IndexPage() {
-  return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><a href="https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md">Getting Started</a></li>
-      </ul>
-    </div>
-  );
+import MaterialsStore from '../stores/MaterialsStore';
+import ProgressPage from './ProgressPage';
+import WebBoxList from '../components/Web/WebBoxList';
+import WebHeader from '../components/Web/WebHeader';
+import WebLayout from '../components/Web/WebLayout';
+import './IndexPage.less';
+
+@observer
+class IndexPage extends ProgressPage {
+
+  store = MaterialsStore;
+
+  state = {
+    modalContent: '',
+    title: '',
+    visible: false,
+    visibleLogin: false,
+    visibleRegister: false,
+    visibleUser: false,
+  };
+
+  static propTypes = {
+    showCarousel: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    showCarousel: false,
+  };
+
+  onClickBox = ({ title, description }) => {
+    this.setState({
+      title,
+      modalContent: description,
+      visible: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+
+  clickDisableFunc = () => {
+    message.info('这个功能将在不久之后上线呢');
+  };
+
+
+  render() {
+    return (
+      <div>
+        <div className="hidden-sm-up index">
+          <div style={{ backgroundColor: 'black', padding: '20px' }}>
+            <h1 className="text-white mix-tmk big-font">
+              THE WORKSHOP<br />
+              OF DESIGN+
+            </h1>
+          </div>
+          <div className="flex-center flex-stretch">
+            <div
+              onClick={this.clickDisableFunc}
+              className="flex-equal-child"
+              style={{ backgroundColor: '#FF9900', padding: '10px 0px', width: '33%' }}
+            >
+              <p style={{ fontSize: '25px' }} className="text-white text-center">
+                TOP6
+              </p>
+            </div>
+            <div
+              className="flex-equal-child text-center"
+              style={{ backgroundColor: '#FF3366', padding: '10px 0px', width: '33%' }}
+            >
+              <Link to="/user/">
+                <div style={{ height: '100%' }} className="flex-center">
+                  <Icon className="text-white" type="user" style={{ fontSize: '25px', fontWeight: 800 }} />
+                </div>
+              </Link>
+            </div>
+            <div
+              onClick={this.clickDisableFunc}
+              className="flex-equal-child"
+              style={{ backgroundColor: '#6666FF', padding: '10px 0px', width: '33%' }}
+            >
+              <div style={{ height: '100%' }} className="flex-center">
+                <Icon className="text-white" type="search" style={{ fontSize: '25px', fontWeight: 800 }} />
+              </div>
+            </div>
+          </div>
+          <div className="classes">
+            <Link to="/design/font/">
+              <div className="design-class">
+                <p className="text-white menu-font">字体</p>
+              </div>
+            </Link>
+            <Link to="/design/background/">
+              <div className="design-class">
+                <p className="text-white menu-font">背景</p>
+              </div>
+            </Link>
+            <Link to="/design/image/">
+              <div className="design-class">
+                <p className="text-white menu-font">矢量素材</p>
+              </div>
+            </Link>
+            <Link to="/design/layout/">
+              <div className="design-class">
+                <p className="text-white menu-font">版式欣赏</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className="hidden-xs-down">
+          <WebHeader />
+          {this.props.showCarousel && (
+            <div className="flex-center" style={{ paddingTop: 30 }}>
+              <div style={{ width: 830, height: 330 }}>
+                <Carousel autoplay effect="fade">
+                  <div>
+                    <img
+                      alt="carousel-1"
+                      className="img-responsive carousel-web"
+                      src={require('../../public/carousel-1.jpg')}
+                    />
+                  </div>
+                  <div>
+                    <img
+                      alt="carousel-2"
+                      className="img-responsive carousel-web"
+                      src={require('../../public/carousel-2.jpg')}
+                    />
+                  </div>
+                </Carousel>
+              </div>
+            </div>
+          )}
+          <div className="find" style={{ paddingTop: 30 }}>
+            <h1 className="text-center" style={{ fontSize: 36 }}>发现素材</h1>
+            <div style={{ width: 144, height: 6 }} className="center-block">
+              <div style={{ display: 'inline-block', width: 36, height: '100%', backgroundColor: '#FFCC00' }} />
+              <div style={{ display: 'inline-block', width: 36, height: '100%', backgroundColor: '#FF9933' }} />
+              <div style={{ display: 'inline-block', width: 36, height: '100%', backgroundColor: '#FF3366' }} />
+              <div style={{ display: 'inline-block', width: 36, height: '100%', backgroundColor: '#9900FF' }} />
+            </div>
+            <div className="flex-center" style={{ padding: '40px 100px' }}>
+              <Link to="/design/font/">
+                <div style={{ margin: 20, position: 'relative' }}>
+                  <img
+                    alt="font"
+                    className="img-responsive web-big-img"
+                    src={require('../../public/big-font.jpg')}
+                  />
+                  <p style={{ margin: 0, padding: 0 }} className="absolute-center text-white font-36">字体</p>
+                </div>
+              </Link>
+              <Link to="/design/background/">
+                <div style={{ margin: 20, position: 'relative' }}>
+                  <img
+                    alt="background"
+                    className="img-responsive web-big-img"
+                    src={require('../../public/big-background.jpg')}
+                  />
+                  <p style={{ margin: 0, padding: 0 }} className="absolute-center text-white font-36">背景</p>
+                </div>
+              </Link>
+              <Link to="/design/image/">
+                <div style={{ margin: 20, position: 'relative' }}>
+                  <img
+                    alt="tupian"
+                    className="img-responsive web-big-img"
+                    src={require('../../public/big-image.jpg')}
+                  />
+                  <p style={{ margin: 0, padding: 0 }} className="absolute-center text-white font-36">矢量</p>
+                </div>
+              </Link>
+              <Link to="/design/layout/">
+                <div style={{ margin: 20, position: 'relative' }}>
+                  <img
+                    alt="layout"
+                    className="img-responsive web-big-img"
+                    src={require('../../public/big-layout.jpg')}
+                  />
+                  <p style={{ margin: 0, padding: 0 }} className="absolute-center text-white font-36">排版</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+
+          <div>
+            <div style={{ width: 60, height: 36, display: 'inline-block', verticalAlign: 'text-bottom' }}>
+              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FFCC00' }} />
+              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF9933' }} />
+              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF3366' }} />
+              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#9900FF' }} />
+            </div>
+
+            <div style={{ display: 'nine' }}>
+              {JSON.stringify(this.store.image.count)}
+              {JSON.stringify(this.store.font.count)}
+              {JSON.stringify(this.store.background.count)}
+              {JSON.stringify(this.store.layout.count)}
+            </div>
+
+            <Route exact path="/" render={() => (<span style={{ fontSize: 36, marginLeft: 15 }}>最受欢迎</span>)} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="字体"
+                  boxList={this.store.font.data && this.store.font.data.results}
+                />)}
+            />
+
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="背景"
+                  boxList={this.store.background.data && this.store.background.data.results}
+                />)}
+            />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="矢量"
+                  boxList={this.store.image.data && this.store.image.data.results}
+                />)}
+            />
+
+            <Route
+              path="/design/font"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="字体"
+                  boxList={this.store.font.data && this.store.font.data.results}
+                />)}
+            />
+            <Route
+              path="/design/background"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="背景"
+                  boxList={this.store.background.data && this.store.background.data.results}
+                />)}
+            />
+            <Route
+              path="/design/image"
+              render={() => (
+                <WebBoxList
+                  onClick={this.onClickBox}
+                  title="矢量"
+                  boxList={this.store.image.data && this.store.image.data.results}
+                />)}
+            />
+
+            <Route
+              path="/design/layout"
+              render={() => (
+                <WebLayout
+                  onClick={this.onClickBox}
+                  boxList={this.store.layout.data && this.store.layout.data.results}
+                />)}
+            />
+
+          </div>
+        </div>
+        <Modal
+          visible={this.state.visible}
+          title={this.state.title}
+          onCancel={this.closeModal}
+          footer={[
+            <Button key="back" size="large" onClick={this.closeModal}>关闭</Button>,
+          ]}
+        >
+          {this.state.modalContent}
+        </Modal>
+
+      </div>
+    );
+  }
 }
 
-IndexPage.propTypes = {
-};
-
-export default connect()(IndexPage);
+export default IndexPage;

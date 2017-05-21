@@ -12,16 +12,17 @@ class UserRegistrationSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=63)
     password = serializers.CharField(max_length=128)
     confirm_password = serializers.CharField(max_length=128)
-    captcha_key = serializers.CharField(max_length=255)
-    captcha_ans = serializers.CharField(max_length=32)
+
+    # captcha_key = serializers.CharField(max_length=255)
+    # captcha_ans = serializers.CharField(max_length=32)
 
     def validate(self, data):
         if User.objects.filter(email=data['email']).exists():
             raise serializers.ValidationError('Email already exists.')
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError('The two passwords are not the same.')
-        if data['captcha_ans'] != CaptchaStore.objects.get(hashkey=data['captcha_key']).response:
-            raise serializers.ValidationError('Captcha error.')
+        # if data['captcha_ans'] != CaptchaStore.objects.get(hashkey=data['captcha_key']).response:
+        #     raise serializers.ValidationError('Captcha error.')
         return data
 
 
