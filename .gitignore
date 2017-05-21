@@ -108,7 +108,7 @@ fabric.properties
 
 # Django
 *.pyc
-localsettings.py
+local_settings.py
 
 
 # production
