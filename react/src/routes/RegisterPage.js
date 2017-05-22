@@ -18,7 +18,7 @@ class LoginPage extends React.Component {
 
     return (
       <div>
-        <MobileHeader title="登陆" backgroundImage={`${staticUrl}/register.jpg`} />
+        <MobileHeader title="注册" backgroundImage={`${staticUrl}/register.jpg`} />
         <div style={{ padding: '20px 30px' }}>
           <Register />
           <div style={{ paddingTop: 20, textAlign: 'center' }}>
