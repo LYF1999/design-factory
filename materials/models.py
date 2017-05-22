@@ -14,3 +14,9 @@ class Material(models.Model):
     type = models.IntegerField('类型', choices=MATERIAL_TYPE_CHOICE, default=MaterialType.MATERIAL)
     description = models.TextField()
     created_at = models.DateTimeField(u'创建时间', auto_now_add=True)
+
+    def __str__(self):
+        return '{}-{}'.format(self.get_type_display(), self.title)
+
+    def __unicode__(self):
+        return '{}-{}'.format(self.get_type_display(), self.title)

@@ -9,8 +9,8 @@ class MaterialType(object):
 
 
 MATERIAL_TYPE_CHOICE = (
-    (MaterialType.FONT, 'Font'),
-    (MaterialType.BACKGROUND, 'Background'),
-    (MaterialType.MATERIAL, 'Material'),
-    (MaterialType.PLATE_TYPE, 'Plate Type'),
+    (MaterialType.FONT, '字体'),
+    (MaterialType.BACKGROUND, '背景'),
+    (MaterialType.MATERIAL, '矢量'),
+    (MaterialType.PLATE_TYPE, '版式'),
 )
