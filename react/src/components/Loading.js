@@ -8,7 +8,7 @@ class Loading extends React.Component {
 
   render() {
     return (
-      <div className="loading-div" style={{ width: '100%', height: '100%' }}>
+      <div className="loading-div" style={{ width: '100%', height: '100%', position: 'relative' }}>
         <Icon className="absolute-center" style={{ fontSize: 40 }} type="loading" />
       </div>
     );

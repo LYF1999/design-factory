@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'captcha',
     'django_filters',
+    'django_summernote',
 
     'materials',
     'users',

@@ -140,7 +140,7 @@ class IndexPage extends ProgressPage {
               </div>
             </div>
           )}
-          <div className="find" style={{ paddingTop: 30 }}>
+          <div className="find center-block" style={{ paddingTop: 30, maxWidth: 1200 }}>
             <h1 className="text-center" style={{ fontSize: 36 }}>发现素材</h1>
             <div style={{ width: 144, height: 6 }} className="center-block">
               <div style={{ display: 'inline-block', width: 36, height: '100%', backgroundColor: '#FFCC00' }} />
@@ -193,13 +193,7 @@ class IndexPage extends ProgressPage {
           </div>
 
 
-          <div>
-            <div style={{ width: 60, height: 36, display: 'inline-block', verticalAlign: 'text-bottom' }}>
-              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FFCC00' }} />
-              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF9933' }} />
-              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF3366' }} />
-              <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#9900FF' }} />
-            </div>
+          <div style={{ maxWidth: 1200 }} className="center-block">
 
             <div style={{ display: 'nine' }}>
               {JSON.stringify(this.store.image.count)}
@@ -208,12 +202,35 @@ class IndexPage extends ProgressPage {
               {JSON.stringify(this.store.layout.count)}
             </div>
 
-            <Route exact path="/" render={() => (<span style={{ fontSize: 36, marginLeft: 15 }}>最受欢迎</span>)} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <div className="center-block" style={{ width: 800, height: 1, backgroundColor: '#2e2e2e', margin: '30px auto' }} />)}
+            />
+
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <div style={{ paddingTop: 30 }}>
+                  <div style={{ width: 60, height: 36, display: 'inline-block', verticalAlign: 'text-bottom' }}>
+                    <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FFCC00' }} />
+                    <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF9933' }} />
+                    <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#FF3366' }} />
+                    <div style={{ display: 'inline-block', width: 15, height: '100%', backgroundColor: '#9900FF' }} />
+                  </div>
+                  <span style={{ fontSize: 36, marginLeft: 15 }}>最受欢迎</span>
+                </div>
+              )}
+            />
+
             <Route
               exact
               path="/"
               render={() => (
                 <WebBoxList
+                  loading={this.store.font.loading}
                   onClick={this.onClickBox}
                   title="字体"
                   boxList={this.store.font.data && this.store.font.data.results}
@@ -225,6 +242,7 @@ class IndexPage extends ProgressPage {
               path="/"
               render={() => (
                 <WebBoxList
+                  loading={this.store.background.loading}
                   onClick={this.onClickBox}
                   title="背景"
                   boxList={this.store.background.data && this.store.background.data.results}
@@ -235,6 +253,7 @@ class IndexPage extends ProgressPage {
               path="/"
               render={() => (
                 <WebBoxList
+                  loading={this.store.image.loading}
                   onClick={this.onClickBox}
                   title="矢量"
                   boxList={this.store.image.data && this.store.image.data.results}
@@ -245,6 +264,7 @@ class IndexPage extends ProgressPage {
               path="/design/font"
               render={() => (
                 <WebBoxList
+                  loading={this.store.font.loading}
                   onClick={this.onClickBox}
                   title="字体"
                   boxList={this.store.font.data && this.store.font.data.results}
@@ -254,6 +274,7 @@ class IndexPage extends ProgressPage {
               path="/design/background"
               render={() => (
                 <WebBoxList
+                  loading={this.store.background.loading}
                   onClick={this.onClickBox}
                   title="背景"
                   boxList={this.store.background.data && this.store.background.data.results}
@@ -263,6 +284,7 @@ class IndexPage extends ProgressPage {
               path="/design/image"
               render={() => (
                 <WebBoxList
+                  loading={this.store.image.loading}
                   onClick={this.onClickBox}
                   title="矢量"
                   boxList={this.store.image.data && this.store.image.data.results}
@@ -273,6 +295,7 @@ class IndexPage extends ProgressPage {
               path="/design/layout"
               render={() => (
                 <WebLayout
+                  loading={this.store.layout.loading}
                   onClick={this.onClickBox}
                   boxList={this.store.layout.data && this.store.layout.data.results}
                 />)}
@@ -281,6 +304,7 @@ class IndexPage extends ProgressPage {
           </div>
         </div>
         <Modal
+          style={{ width: '80%', height: '80%' }}
           visible={this.state.visible}
           title={this.state.title}
           onCancel={this.closeModal}
@@ -288,7 +312,7 @@ class IndexPage extends ProgressPage {
             <Button key="back" size="large" onClick={this.closeModal}>关闭</Button>,
           ]}
         >
-          {this.state.modalContent}
+          <div className="html-content" dangerouslySetInnerHTML={{ __html: this.state.modalContent }} />
         </Modal>
 
       </div>

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Col, Row } from 'antd';
 
+import Loading from '../Loading';
+
 import Box from '../Box';
 
 class WebLayout extends React.Component {
@@ -8,6 +10,7 @@ class WebLayout extends React.Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     boxList: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
   };
   static defaultProps = {
     boxList: [],
@@ -73,22 +76,28 @@ class WebLayout extends React.Component {
           }}
         />
         <span style={{ fontSize: 28, marginLeft: 10 }}>排版</span>
-        <div style={{ paddingTop: 20 }}>
-          <Row>
-            <Col span={6}>
-              {this.state.array1.map(this.createBox)}
-            </Col>
-            <Col span={6}>
-              {this.state.array2.map(this.createBox)}
-            </Col>
-            <Col span={6}>
-              {this.state.array3.map(this.createBox)}
-            </Col>
-            <Col span={6}>
-              {this.state.array4.map(this.createBox)}
-            </Col>
-          </Row>
-        </div>
+        {
+          this.props.loading ? (
+            <Loading />
+          ) : (
+            <div style={{ paddingTop: 20 }}>
+              <Row>
+                <Col span={6}>
+                  {this.state.array1.map(this.createBox)}
+                </Col>
+                <Col span={6}>
+                  {this.state.array2.map(this.createBox)}
+                </Col>
+                <Col span={6}>
+                  {this.state.array3.map(this.createBox)}
+                </Col>
+                <Col span={6}>
+                  {this.state.array4.map(this.createBox)}
+                </Col>
+              </Row>
+            </div>
+          )
+        }
       </div>
     );
   }

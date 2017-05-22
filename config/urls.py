@@ -29,5 +29,6 @@ def index(request):
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^summernote/', include('django_summernote.urls')),
     url(r'^', index),
 ]

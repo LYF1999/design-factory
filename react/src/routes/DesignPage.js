@@ -65,7 +65,7 @@ class DesignPage extends ProgressPage {
   };
 
   onClick = ({ id }) => {
-    // this.props.history.push()
+    this.props.history.push(`/design/detail/${id}/`);
   };
 
   createBox = (box) => (
@@ -80,7 +80,13 @@ class DesignPage extends ProgressPage {
   );
 
   createLayout = (layout) => (
-    <div><img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" /></div>
+    <div
+      onClick={() => {
+        this.onClick({ id: layout.id });
+      }}
+    >
+      <img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" />
+    </div>
   );
 
   createContent = () => {

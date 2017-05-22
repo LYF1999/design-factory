@@ -6,6 +6,7 @@ import { DEV } from '../App';
 import IndexPage from '../routes/IndexPage';
 import DesignPage from '../routes/DesignPage';
 import LoginPage from '../routes/LoginPage';
+import WapDetail from '../routes/MobileDetail';
 import Logout from './User/Logout';
 import RegisterPage from '../routes/RegisterPage';
 import UserStore from '../stores/UserStore';
@@ -31,6 +32,7 @@ class MainLayout extends React.Component {
       <div>
         <Switch>
           <Route exact path="/" render={() => <IndexPage showCarousel />} />
+          <Route path="/design/detail/:id" component={WapDetail} />
           <Route path="/design/:class" component={DesignPage} />
           <Route path="/user/login" component={LoginPage} />
           <Route path="/user/register" component={RegisterPage} />
