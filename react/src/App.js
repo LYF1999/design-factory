@@ -16,7 +16,7 @@ if (DEV) {
 
 export { MyRouter };
 
-let staticUrl = '';
+let staticUrl = 'https://statics-dev.purewhitelyx.com/static/';
 if (!DEV) {
   staticUrl = '/static';
 }
