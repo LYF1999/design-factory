@@ -17,10 +17,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from config.router import router
+from django.shortcuts import render
 
 admin.autodiscover()
+
+
+def index(request):
+    return render(request, 'index.html', locals())
+
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^', index),
 ]

@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { DEV } from '../App';
+import { staticUrl } from '../App';
 import Register from '../components/User/Register';
 import { noLogin } from '../utils/decprators';
 import MobileHeader from '../components/Mobile/MobileHeader';
@@ -15,14 +15,10 @@ class LoginPage extends React.Component {
   static defaultProps = {};
 
   render() {
-    let staticUrl = '';
-    if (!DEV) {
-      staticUrl = '/static';
-    }
 
     return (
       <div>
-        <MobileHeader title="登陆" backgroundImage={`${staticUrl}/login.jpg`} />
+        <MobileHeader title="登陆" backgroundImage={`${staticUrl}/register.jpg`} />
         <div style={{ padding: '20px 30px' }}>
           <Register />
           <div style={{ paddingTop: 20, textAlign: 'center' }}>

@@ -1,10 +1,9 @@
 import React from 'react';
-import { message } from 'antd';
 import { observer } from 'mobx-react';
 import { Route } from 'react-router-dom';
 import ProgressPage from './ProgressPage';
 import MobileHeader from '../components/Mobile/MobileHeader';
-import { DEV } from '../App';
+import { staticUrl } from '../App';
 import MaterialsStore from '../stores/MaterialsStore';
 import IndexPage from './IndexPage';
 import Box from '../components/Box';
@@ -34,10 +33,6 @@ class DesignPage extends ProgressPage {
   }
 
   updateHeader = () => {
-    let staticUrl = '';
-    if (!DEV) {
-      staticUrl = '/static';
-    }
     let backgroundImage;
     let title;
     const designClass = this.props.match.params.class;

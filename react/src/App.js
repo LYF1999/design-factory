@@ -16,10 +16,17 @@ if (DEV) {
 
 export { MyRouter };
 
+let staticUrl = '';
+if (!DEV) {
+  staticUrl = '/static';
+}
+
+export { staticUrl };
+
 export default function () {
   return (
-    <HashRouter>
+    <MyRouter>
       <Route path={'/'} component={MainLayout} />
-    </HashRouter>
+    </MyRouter>
   );
 }

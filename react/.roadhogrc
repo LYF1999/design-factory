@@ -6,6 +6,8 @@
     "transform-decorators-legacy",
     "mobx-deep-action"
   ],
+  "outputPath": "../statics/dist/",
+  "publicPath": "https://statics-dev.purewhitelyx.com/static/dist/",
   "env": {
     "development": {
       "extraBabelPlugins": [

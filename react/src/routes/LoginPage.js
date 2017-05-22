@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { DEV } from '../App';
+import {  staticUrl } from '../App';
 import Login from '../components/User/Login';
 import { noLogin } from '../utils/decprators';
 import MobileHeader from '../components/Mobile/MobileHeader';
@@ -15,10 +15,6 @@ class LoginPage extends React.Component {
   static defaultProps = {};
 
   render() {
-    let staticUrl = '';
-    if (!DEV) {
-      staticUrl = '/static';
-    }
 
     return (
       <div>
