@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import { Card, Modal, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import Register from '../User/Register';
 import UserStore from '../../stores/UserStore';
 
 
+@observer
 class WebHeader extends React.Component {
 
   static propTypes = {};
@@ -50,6 +52,11 @@ class WebHeader extends React.Component {
       visibleUser: true,
     });
   };
+
+  logout = () => {
+    UserStore.logout();
+    this.closeUserModal();
+  }
 
   render() {
     return (
@@ -97,7 +104,7 @@ class WebHeader extends React.Component {
             <Button key="back" size="large" onClick={this.closeLoginModal}>关闭</Button>,
           ]}
         >
-          <Login />
+          <Login onComplete={this.closeLoginModal} />
         </Modal>
         <Modal
           visible={this.state.visibleRegister}
@@ -107,14 +114,15 @@ class WebHeader extends React.Component {
             <Button key="back" size="large" onClick={this.closeRegisterModal}>关闭</Button>,
           ]}
         >
-          <Register />
+          <Register onComplete={this.closeLoginModal} />
         </Modal>
         <Modal
           visible={this.state.visibleUser}
           title={'个人信息'}
           onCancel={this.closeUserModal}
           footer={[
-            <Button key="back" size="large" onClick={this.closeUserModal}>关闭</Button>,
+            <Button key="back" size="large" onClick={this.logout}>注销</Button>,
+            <Button key="back" size="large" onClick={this.closeUserModal}>关闭</Button>
           ]}
         >
           <Card style={{ margin: 20 }}>

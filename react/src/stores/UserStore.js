@@ -33,7 +33,7 @@ class UserStore {
   };
 
   @action logout = async () => {
-    const { data, err } = await request('/api/auth/logout/', {
+    const { err } = await request('/api/auth/logout/', {
       ...postOptions,
     });
 

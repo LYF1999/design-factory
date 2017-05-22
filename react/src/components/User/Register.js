@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 
 
@@ -11,7 +11,9 @@ const FormItem = Form.Item;
 
 class Login extends React.Component {
 
-  static propTypes = {};
+  static propTypes = {
+    onComplete: PropTypes.func,
+  };
   static defaultProps = {};
 
   handleSubmit = (e) => {
@@ -25,6 +27,7 @@ class Login extends React.Component {
           .then(({ err: error }) => {
             if (!error) {
               message.success('注册成功');
+              this.props.onComplete();
               UserStore.fetch();
             } else {
               const detail = error.detail;
