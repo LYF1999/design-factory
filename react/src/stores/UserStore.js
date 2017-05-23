@@ -51,7 +51,9 @@ class UserStore {
         this.err = err;
       } else {
         this.user = {};
-        this.updateData();
+        FavoriteObjectStore.allFavoriteObject = {};
+        FavoriteCtrlStore.favoriteCtrlSet = [];
+        FavoriteCtrlStore.favoriteCtrlDetail = {};
         message.success('注销成功');
       }
     });
