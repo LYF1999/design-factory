@@ -66,7 +66,7 @@ class Box extends React.Component {
         className={this.props.className}
         bodyStyle={{ padding: 0 }}
       >
-        <div className="custom-image">
+        <div className="custom-image" style={{ overflow: 'hidden' }}>
           <div style={this.props.contentStyle}>
             <img alt="example" className="img-responsive" src={this.props.imgSrc} />
           </div>

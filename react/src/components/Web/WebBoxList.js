@@ -17,7 +17,7 @@ class WebBoxList extends React.Component {
     <Box
       key={box.id}
       className="box"
-      contentStyle={{ width: 200, height: 100 }}
+      contentStyle={{ width: 200, height: 130 }}
       onClick={this.props.onClick}
       imgSrc={box.cover}
       box={box}

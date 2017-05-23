@@ -1,5 +1,7 @@
 import React from 'react';
+import { Card } from 'antd';
 import { observer } from 'mobx-react';
+import LiekIcon from '../components/LikeIcon';
 import { Route } from 'react-router-dom';
 import ProgressPage from './ProgressPage';
 import MobileHeader from '../components/Mobile/MobileHeader';
@@ -74,7 +76,7 @@ class DesignPage extends ProgressPage {
       box={box}
       imgSrc={box.cover}
       className="box"
-      contentStyle={{ width: 160, height: 80 }}
+      contentStyle={{ width: 160, height: 100 }}
       copyText={'12312312312'}
     />
   );
@@ -85,7 +87,12 @@ class DesignPage extends ProgressPage {
         this.onClick({ id: layout.id });
       }}
     >
-      <img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" />
+      <Card>
+        <img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" />
+        <div>
+          <LiekIcon id={layout.id} />
+        </div>
+      </Card>
     </div>
   );
 
