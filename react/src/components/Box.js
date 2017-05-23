@@ -1,7 +1,12 @@
 import React, { PropTypes } from 'react';
+import { observer } from 'mobx-react';
 import Clipboard from 'clipboard';
 import { Card, Icon } from 'antd';
+import WebUIStore from '../stores/WebUI';
+import LikeIcon from './LikeIcon';
+import FavoriteObjectStore from '../stores/FavoriteObjectStore';
 
+@observer
 class Box extends React.Component {
 
   static propTypes = {
@@ -68,7 +73,7 @@ class Box extends React.Component {
         </div>
         <div className="custom-card" style={{ padding: '0 5px' }}>
           {/*{this.createFuncBtn()}*/}
-          {/*<Icon style={{ margin: 5 }} type="star" className="pull-right big-icon" />*/}
+          <LikeIcon id={this.props.box.id} />
         </div>
       </Card>
     );

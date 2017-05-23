@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Icon, Carousel, Button, Modal, message } from 'antd';
+import { Icon, Carousel, Button, Modal, message, Card } from 'antd';
 import { observer } from 'mobx-react';
 
+import LikeIcon from '../components/LikeIcon';
+
 import MaterialsStore from '../stores/MaterialsStore';
+import WebUIStore from '../stores/WebUI';
 import ProgressPage from './ProgressPage';
 import WebBoxList from '../components/Web/WebBoxList';
 import WebHeader from '../components/Web/WebHeader';
@@ -16,6 +19,7 @@ class IndexPage extends ProgressPage {
   store = MaterialsStore;
 
   state = {
+    chooseBoxId: null,
     modalContent: '',
     title: '',
     visible: false,
@@ -32,8 +36,14 @@ class IndexPage extends ProgressPage {
     showCarousel: false,
   };
 
-  onClickBox = ({ title, description }) => {
+  componentDidMount() {
+    super.componentDidMount();
+    WebUIStore.showMaterial = this.onClickBox;
+  }
+
+  onClickBox = ({ id, title, description }) => {
     this.setState({
+      chooseBoxId: id,
       title,
       modalContent: description,
       visible: true,
@@ -55,7 +65,7 @@ class IndexPage extends ProgressPage {
   render() {
     return (
       <div>
-        <div className="hidden-sm-up index">
+        <div className="hidden-md-up index">
           <div style={{ backgroundColor: 'black', padding: '20px' }}>
             <h1 className="text-white mix-tmk big-font">
               THE WORKSHOP<br />
@@ -116,7 +126,7 @@ class IndexPage extends ProgressPage {
           </div>
         </div>
 
-        <div className="hidden-xs-down">
+        <div className="hidden-sm-down">
           <WebHeader />
           {this.props.showCarousel && (
             <div className="flex-center" style={{ paddingTop: 30 }}>
@@ -206,7 +216,8 @@ class IndexPage extends ProgressPage {
               exact
               path="/"
               render={() => (
-                <div className="center-block" style={{ width: 800, height: 1, backgroundColor: '#2e2e2e', margin: '30px auto' }} />)}
+                <div className="center-block"
+                     style={{ width: 800, height: 1, backgroundColor: '#2e2e2e', margin: '30px auto' }} />)}
             />
 
             <Route
@@ -312,9 +323,14 @@ class IndexPage extends ProgressPage {
             <Button key="back" size="large" onClick={this.closeModal}>关闭</Button>,
           ]}
         >
+          <p
+            className="text-center text-primary"
+            style={{ margin: '20px 30px' }}
+          >
+            喜欢的话就赶快收藏吧！<LikeIcon style={{ float: 'none' }} id={this.state.chooseBoxId} />
+          </p>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: this.state.modalContent }} />
         </Modal>
-
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import './index.less';
+import './bootstrap-grid.min.css';
 
 
 export const DEV = (process.env.NODE_ENV === 'development');
@@ -16,9 +17,10 @@ if (DEV) {
 
 export { MyRouter };
 
-let staticUrl = 'https://statics-dev.purewhitelyx.com/static/';
+let staticUrl = '';
+
 if (!DEV) {
-  staticUrl = '/static';
+  staticUrl = 'https://statics-dev.purewhitelyx.com/static/';
 }
 
 export { staticUrl };

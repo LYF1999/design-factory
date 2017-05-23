@@ -3,11 +3,51 @@ import { observer } from 'mobx-react';
 import { Card, Modal, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
+import FavoriteCtrl from '../Favorite/FavoriteCtrl';
 import Login from '../User/Login';
 import Register from '../User/Register';
 
+import Box from '../../components/Box';
 import UserStore from '../../stores/UserStore';
+import WebUiStore from '../../stores/WebUI';
+import FavoriteCtrlStore from '../../stores/FavoriteCtrlStore';
 
+
+const FavoriteCtrlModal = observer(({ close, visible }) => {
+
+  const clickBox = ({ id, title, description }) => {
+    WebUiStore.showMaterial({
+      id,
+      title,
+      description
+    })
+  };
+
+  const createBox = box => (
+    <Box
+      onClick={clickBox}
+      key={box.id}
+      box={box}
+      imgSrc={box.cover}
+      className="box"
+      contentStyle={{ width: 160, height: 80 }}
+      copyText={'12312312312'}
+    />
+  );
+  return (
+    <Modal
+      visible={visible}
+      title={FavoriteCtrlStore.favoriteCtrlDetail.name}
+      onCancel={close}
+      footer={[
+        <Button size="large" onClick={close}>关闭</Button>
+      ]}
+    >
+      {FavoriteCtrlStore.favoriteCtrlDetail.materials &&
+      FavoriteCtrlStore.favoriteCtrlDetail.materials.map(createBox)}
+    </Modal>
+  );
+});
 
 @observer
 class WebHeader extends React.Component {
@@ -19,6 +59,16 @@ class WebHeader extends React.Component {
     visibleLogin: false,
     visibleRegister: false,
     visibleUser: false,
+    showFavoriteCtrl: false,
+  };
+
+  onChooseFavoriteCtrl = ({ id }) => {
+    WebUiStore.selectFavoriteCtrl = id;
+    FavoriteCtrlStore.get(id);
+    this.setState({
+      showFavoriteCtrl: true,
+      visibleUser: false,
+    });
   };
 
   closeLoginModal = () => {
@@ -26,6 +76,7 @@ class WebHeader extends React.Component {
       visibleLogin: false,
     });
   };
+
   closeRegisterModal = () => {
     this.setState({
       visibleRegister: false,
@@ -53,10 +104,17 @@ class WebHeader extends React.Component {
     });
   };
 
+  closeFavoriteCtrlModal = () => {
+    this.setState({
+      showFavoriteCtrl: false,
+    });
+  };
+
   logout = () => {
     UserStore.logout();
     this.closeUserModal();
-  }
+  };
+
 
   render() {
     return (
@@ -101,7 +159,7 @@ class WebHeader extends React.Component {
           title={'登陆'}
           onCancel={this.closeLoginModal}
           footer={[
-            <Button key="back" size="large" onClick={this.closeLoginModal}>关闭</Button>,
+            <Button size="large" onClick={this.closeLoginModal}>关闭</Button>,
           ]}
         >
           <Login onComplete={this.closeLoginModal} />
@@ -111,25 +169,33 @@ class WebHeader extends React.Component {
           title={'注册'}
           onCancel={this.closeRegisterModal}
           footer={[
-            <Button key="back" size="large" onClick={this.closeRegisterModal}>关闭</Button>,
+            <Button size="large" onClick={this.closeRegisterModal}>关闭</Button>,
           ]}
         >
-          <Register onComplete={this.closeLoginModal} />
+          <Register onComplete={this.closeRegisterModal} />
         </Modal>
         <Modal
           visible={this.state.visibleUser}
-          title={'个人信息'}
+          title={'个人中心'}
           onCancel={this.closeUserModal}
           footer={[
-            <Button key="back" size="large" onClick={this.logout}>注销</Button>,
-            <Button key="back" size="large" onClick={this.closeUserModal}>关闭</Button>
+            <Button size="large" onClick={this.logout}>注销</Button>,
+            <Button size="large" onClick={this.closeUserModal}>关闭</Button>
           ]}
         >
-          <Card style={{ margin: 20 }}>
+          <Card title="个人信息" style={{ margin: 20 }}>
             <p className="text-center">您的用户名: {UserStore.user.username}</p>
             <p className="text-center">您的邮箱: {UserStore.user.email}</p>
           </Card>
+
+          <FavoriteCtrl onClick={this.onChooseFavoriteCtrl} style={{ margin: 20 }} />
+          <br />
+          <br />
         </Modal>
+        <FavoriteCtrlModal
+          visible={this.state.showFavoriteCtrl}
+          close={this.closeFavoriteCtrlModal}
+        />
       </div>
     );
   }

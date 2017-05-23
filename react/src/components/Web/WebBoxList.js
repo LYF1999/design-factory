@@ -37,7 +37,14 @@ class WebBoxList extends React.Component {
           }}
         />
         <span style={{ fontSize: 28, marginLeft: 10 }}>{this.props.title}</span>
-        <div style={{ paddingTop: 20 }}>
+        <div
+          style={{
+            paddingTop: 20,
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}>
           {this.props.boxList.map(this.createBox)}
         </div>
       </div>

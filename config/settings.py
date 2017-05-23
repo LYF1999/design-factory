@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'materials',
     'users',
     'files',
+    'favorite',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -129,6 +130,14 @@ STATICFILES_DIRS = (
 
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
+try:
+    from .local_settings import *
+except:
+    print 'no local_settings'
+
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_CLASSES': (
@@ -139,12 +148,10 @@ REST_FRAMEWORK = {
         'anon': '200/hour',
         'user': '300/hour'
     },
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
-try:
-    from .local_settings import *
-except:
-    print 'no local_settings'
-
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+if DEBUG:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ('rest_framework.renderers.BrowsableAPIRenderer', )

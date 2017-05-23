@@ -112,13 +112,13 @@ class DesignPage extends ProgressPage {
   render() {
     return (
       <div>
-        <div className="design-page hidden-sm-up">
+        <div className="design-page hidden-md-up">
           <MobileHeader title={this.state.title} backgroundImage={this.state.backgroundImage} />
           <div className="flex-between-warp">
             {this.createContent()}
           </div>
         </div>
-        <div className="hidden-xs-down">
+        <div className="hidden-sm-down">
           <Route component={IndexPage} />
         </div>
       </div>

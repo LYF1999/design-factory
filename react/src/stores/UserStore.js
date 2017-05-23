@@ -1,6 +1,8 @@
 import { observable, action, runInAction } from 'mobx';
 import { message } from 'antd';
 import request from '../utils/request';
+import FavoriteCtrlStore from './FavoriteCtrlStore';
+import FavoriteObjectStore from './FavoriteObjectStore';
 import { getOptions, postOptions } from '../utils/fetchOptions';
 
 
@@ -8,6 +10,12 @@ class UserStore {
   @observable user = {};
   @observable loading = false;
   @observable err = {};
+
+
+  @action updateData = () => {
+    FavoriteObjectStore.fetchAll();
+    FavoriteCtrlStore.fetch();
+  };
 
 
   @action fetch = async () => {
@@ -28,6 +36,7 @@ class UserStore {
       } else {
         data.auth = true;
         this.user = data;
+        this.updateData();
       }
     });
   };
