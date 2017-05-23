@@ -25,7 +25,7 @@ class FavoriteCtrlStore {
   }
 
   @action post = async (payload) => {
-    const { err } = await request('/api/favorite-ctrl/', { ...getOptions, ...postOptions, ...payload });
+    const { err } = await request('/api/favorite-ctrl/', { ...postOptions(), ...payload });
 
     runInAction(() => {
       if (!err) {

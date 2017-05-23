@@ -21,7 +21,7 @@ class Login extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         request('/api/auth/registration/', {
-          ...postOptions,
+          ...postOptions(),
           body: JSON.stringify(values),
         })
           .then(({ err: error }) => {

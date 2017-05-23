@@ -43,7 +43,7 @@ class UserStore {
 
   @action logout = async () => {
     const { err } = await request('/api/auth/logout/', {
-      ...postOptions,
+      ...postOptions(),
     });
 
     runInAction(() => {
@@ -51,6 +51,7 @@ class UserStore {
         this.err = err;
       } else {
         this.user = {};
+        this.updateData();
         message.success('注销成功');
       }
     });

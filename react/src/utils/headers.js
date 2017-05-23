@@ -30,11 +30,11 @@ export const safeHeaders = {
   Accept: "application/json"
 };
 
-export const unsafeHeaders = {
+export const unsafeHeaders = () => ({
   "Accept": "application/json",
   "Content-Type": "application/json",
   "X-CSRFToken": csrf.getCSRFToken()
-};
+});
 
 export const uploadHeaders = {
   "Accept": "application/json",
