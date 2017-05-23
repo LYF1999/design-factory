@@ -117,7 +117,7 @@ class DesignPage extends ProgressPage {
     const type = this.props.match.params.class;
     if (this.generalType.indexOf(type) !== -1) {
       return (
-        <div className="flex-center" style={{ flexWrap: 'warp' }}>
+        <div className="flex-center" style={{ flexWrap: 'wrap' }}>
           {MaterialsStore[type].data && (
             MaterialsStore[type].data.results.map(this.createBox)
           )}
