@@ -77,8 +77,13 @@ class Box extends React.Component {
         className={this.props.className}
         bodyStyle={{ padding: 0 }}
       >
-        <div className="custom-image" style={{ overflow: 'hidden' }}>
-          <div style={this.props.contentStyle}>
+        <div className="custom-image">
+          <div
+            style={{
+              ...this.props.contentStyle,
+              overflow: 'hidden',
+            }}
+          >
             <LazyLoad
               height={this.state.lazyLoadHeight}
               width={this.state.lazyLoadWidth}
