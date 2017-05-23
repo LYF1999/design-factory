@@ -7,7 +7,7 @@ class FavoriteObjectStore {
   @observable allFavoriteObject = {};
 
   @action fetchAll = async () => {
-    const { data } = await request('api/favorite-object/', { ...getOptions });
+    const { data } = await request('/api/favorite-object/', { ...getOptions });
     runInAction(() => {
       const newData = {};
       for (const object of data) {
