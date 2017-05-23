@@ -117,7 +117,7 @@ class DesignPage extends ProgressPage {
     const type = this.props.match.params.class;
     if (this.generalType.indexOf(type) !== -1) {
       return (
-        <div>
+        <div className="flex-center" style={{ flexWrap: 'warp' }}>
           {MaterialsStore[type].data && (
             MaterialsStore[type].data.results.map(this.createBox)
           )}
@@ -138,9 +138,7 @@ class DesignPage extends ProgressPage {
       <div>
         <div className="design-page hidden-md-up">
           <MobileHeader title={this.state.title} backgroundImage={this.state.backgroundImage} />
-          <div className="flex-between-warp">
-            {this.createContent()}
-          </div>
+          {this.createContent()}
         </div>
         <div className="hidden-sm-down">
           <Route component={IndexPage} />
