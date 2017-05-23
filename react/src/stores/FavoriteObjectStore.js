@@ -1,4 +1,5 @@
 import { observable, action, runInAction } from 'mobx';
+import { message } from 'antd';
 import request from '../utils/request';
 import { postOptions, getOptions, deleteOptions } from '../utils/fetchOptions';
 
@@ -22,6 +23,7 @@ class FavoriteObjectStore {
   @action post = async (payload) => {
     const { err } = await request('/api/favorite-object/', { ...postOptions(), ...payload });
     if (!err) {
+      message.success('添加收藏成功');
       runInAction(() => {
         this.fetchAll();
       });

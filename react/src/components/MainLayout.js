@@ -54,7 +54,6 @@ class MainLayout extends React.Component {
   };
 
   onClose = () => {
-    message.success('添加收藏成功');
     this.setState({
       showModal: false,
     });
