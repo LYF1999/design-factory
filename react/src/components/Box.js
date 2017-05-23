@@ -2,9 +2,8 @@ import React, { PropTypes } from 'react';
 import { observer } from 'mobx-react';
 import Clipboard from 'clipboard';
 import { Card, Icon } from 'antd';
-import WebUIStore from '../stores/WebUI';
+import LazyLoad from 'react-lazy-load';
 import LikeIcon from './LikeIcon';
-import FavoriteObjectStore from '../stores/FavoriteObjectStore';
 
 @observer
 class Box extends React.Component {
@@ -24,6 +23,11 @@ class Box extends React.Component {
     tags: [],
     likeCount: 0,
     box: {},
+  };
+
+  state = {
+    lazyLoadHeight: 100,
+    lazyLoadWidth: 160,
   };
 
   componentWillUnmount() {
@@ -57,6 +61,13 @@ class Box extends React.Component {
     this.props.onClick(this.props.box);
   };
 
+  onLoad = () => {
+    this.setState({
+      lazyLoadWidth: 'auto',
+      lazyLoadHeight: 'auto',
+    });
+  };
+
 
   render() {
     return (
@@ -68,7 +79,14 @@ class Box extends React.Component {
       >
         <div className="custom-image" style={{ overflow: 'hidden' }}>
           <div style={this.props.contentStyle}>
-            <img alt="example" className="img-responsive" src={this.props.imgSrc} />
+            <LazyLoad
+              height={this.state.lazyLoadHeight}
+              width={this.state.lazyLoadWidth}
+              offsetVertical={200}
+              onContentVisible={this.onLoad}
+            >
+              <img alt="example" className="img-responsive" src={this.props.imgSrc} />
+            </LazyLoad>
           </div>
         </div>
         <div className="custom-card" style={{ padding: '0 5px' }}>

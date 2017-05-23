@@ -16,7 +16,7 @@ class FavoriteCtrlSerializer(serializers.ModelSerializer):
 
 class FavoriteObjectSerializer(serializers.ModelSerializer):
     material = MaterialSerializer(read_only=True)
-    material_id = serializers.PrimaryKeyRelatedField(queryset=Material.objects.all())
+    material_id = serializers.PrimaryKeyRelatedField(queryset=Material.objects.all(), write_only=True)
 
     class Meta:
         model = FavoriteObject

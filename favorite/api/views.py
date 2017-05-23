@@ -1,7 +1,9 @@
 #  coding=utf-8
 from __future__ import unicode_literals
+from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import permissions
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 
 from materials.models import Material
@@ -46,9 +48,23 @@ class FavoriteObjectViewSets(ModelViewSet):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         favorite_ctrl = serializer.validated_data['favorite_ctrl']
+
         if not favorite_ctrl.user == request.user:
             return Response({'detail': '不是您的收藏夹'}, status=400)
+        if self.get_queryset().filter(material=serializer.validated_data['material_id']):
+            return Response({'detail': '请勿重复收藏'}, status=400)
 
         serializer.validated_data['material_id'] = serializer.validated_data['material_id'].id
         serializer.save()
         return Response(serializer.data)
+
+    @list_route(permission_classes=[permissions.IsAuthenticated], methods=['DELETE'])
+    def delete_favorite(self, request):
+        if 'material_id' not in request.data:
+            return Response('bad request', status=400)
+
+        material = get_object_or_404(Material, id=request.data['material_id'])
+
+        favorite_object = get_object_or_404(self.get_queryset(), material=material)
+        favorite_object.delete()
+        return Response(status=204)

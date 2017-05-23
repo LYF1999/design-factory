@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card } from 'antd';
 import { observer } from 'mobx-react';
-import LiekIcon from '../components/LikeIcon';
+import LazyLoad from 'react-lazy-load';
 import { Route } from 'react-router-dom';
+import LikeIcon from '../components/LikeIcon';
 import ProgressPage from './ProgressPage';
 import MobileHeader from '../components/Mobile/MobileHeader';
 import { staticUrl } from '../App';
@@ -21,6 +22,8 @@ class DesignPage extends ProgressPage {
   state = {
     backgroundImage: '',
     title: '',
+    lazyLoadWidth: 200,
+    lazyLoadHeight: 200,
   };
 
   generalType = ['font', 'background', 'image'];
@@ -81,6 +84,13 @@ class DesignPage extends ProgressPage {
     />
   );
 
+  onLoad = () => {
+    this.setState({
+      lazyLoadWidth: 'auto',
+      lazyLoadHeight: 'auto',
+    });
+  };
+
   createLayout = (layout) => (
     <div
       onClick={() => {
@@ -88,9 +98,16 @@ class DesignPage extends ProgressPage {
       }}
     >
       <Card>
-        <img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" />
+        <LazyLoad
+          height={this.state.lazyLoadHeight}
+          width={this.state.lazyLoadWidth}
+          offsetVertical={200}
+          onContentVisible={this.onLoad}
+        >
+          <img alt={layout.title} style={{ borderRadius: 10 }} src={layout.cover} className="img-responsive" />
+        </LazyLoad>
         <div>
-          <LiekIcon id={layout.id} />
+          <LikeIcon id={layout.id} />
         </div>
       </Card>
     </div>

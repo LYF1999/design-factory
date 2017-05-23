@@ -25,12 +25,12 @@ class FavoriteObjectStore {
       });
     }
     return {
-      err
-    }
+      err,
+    };
   };
 
   @action del = async (payload) => {
-    const { err } = await request('/api/favorite-object/:id/', { ...deleteOptions, ...payload });
+    const { err } = await request('/api/favorite-object/delete_favorite/', { ...deleteOptions, ...payload });
     if (!err) {
       runInAction(() => {
         this.fetchAll();

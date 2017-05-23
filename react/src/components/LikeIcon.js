@@ -16,8 +16,9 @@ const LikeIcon = ({ id, style, onClick }) => {
     ...style,
   };
 
-  const onCancelLike = () => {
-    FavoriteObjectStore.del({ id });
+  const onCancelLike = (e) => {
+    FavoriteObjectStore.del({ body: JSON.stringify({ material_id: id }) });
+    e.stopPropagation();
   };
 
   if (id in FavoriteObjectStore.allFavoriteObject) {
