@@ -74,7 +74,8 @@ class FavoriteCtrl extends React.Component {
   render() {
     return (
       <Card style={this.props.style} title="收藏夹">
-        {FavoriteCtrlStore.favoriteCtrlSet.map(this.createFavoriteCtrl)}
+        {FavoriteCtrlStore.favoriteCtrlSet &&
+        FavoriteCtrlStore.favoriteCtrlSet.map(this.createFavoriteCtrl)}
 
         <br />
         <br />
