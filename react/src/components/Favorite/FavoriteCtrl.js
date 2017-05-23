@@ -17,10 +17,6 @@ class FavoriteCtrl extends React.Component {
     newFavoriteCtrlName: '',
   };
 
-  componentWillMount() {
-    FavoriteCtrlStore.fetch();
-  }
-
   onClickNew = () => {
     this.setState({
       startNew: true,

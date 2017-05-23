@@ -66,7 +66,7 @@ class IndexPage extends ProgressPage {
   };
 
   createFile = (file, index) => (
-    <a rel="noreferrer noopener" target="_blank" href={file.file}>{`文件${index + 1}`}</a>
+    <a key={file.id} rel="noreferrer noopener" target="_blank" href={file.file}>{`文件${index + 1}`}</a>
   );
 
 

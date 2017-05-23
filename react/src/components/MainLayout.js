@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Modal, Button, message } from 'antd';
 import DevTools from 'mobx-react-devtools';
 import { DEV } from '../App';
+import FavoriteCtrlStore from '../stores/FavoriteCtrlStore';
 import WebUIStore from '../stores/WebUI';
 import IndexPage from '../routes/IndexPage';
 import DesignPage from '../routes/DesignPage';
@@ -36,6 +37,7 @@ class MainLayout extends React.Component {
     MaterialsStore.fetch('image');
     MaterialsStore.fetch('layout');
     FavoriteObjectStore.fetchAll();
+    FavoriteCtrlStore.fetch();
   }
 
   componentDidMount() {
