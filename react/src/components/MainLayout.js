@@ -54,18 +54,22 @@ class MainLayout extends React.Component {
   };
 
   onClose = () => {
+    message.success('添加收藏成功');
     this.setState({
       showModal: false,
     });
   };
 
   onAdd = ({ id }) => {
-    FavoriteObjectStore.post({
+    const { err } = FavoriteObjectStore.post({
       body: JSON.stringify({
         material_id: WebUIStore.onFavoriteMaterial,
         favorite_ctrl: id,
       }),
     });
+    if (!err) {
+      this.onClose();
+    }
   };
 
 

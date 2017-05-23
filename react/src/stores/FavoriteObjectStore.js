@@ -24,10 +24,13 @@ class FavoriteObjectStore {
         this.fetchAll();
       });
     }
-  }
+    return {
+      err
+    }
+  };
 
   @action del = async (payload) => {
-    const { err } = await request('/api/favorite-object/', { ...deleteOptions, ...payload });
+    const { err } = await request('/api/favorite-object/:id/', { ...deleteOptions, ...payload });
     if (!err) {
       runInAction(() => {
         this.fetchAll();

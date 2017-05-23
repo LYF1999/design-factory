@@ -20,6 +20,11 @@ class WapDetail extends React.Component {
     this.props.history.goBack();
   };
 
+
+  createFile = (file, index) => (
+    <a rel="noreferrer noopener" target="_blank" href={file.file}>{`文件${index + 1}`}</a>
+  );
+
   render() {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 10 }}>
@@ -37,6 +42,10 @@ class WapDetail extends React.Component {
               <div className="html-content" dangerouslySetInnerHTML={{ __html: MaterialsStore.selected.description }} />
             </div>
           )}
+        </Card>
+        <Card title="下载区域" style={{ margin: 15, padding: '30px 20px' }}>
+          {MaterialsStore.selected.files &&
+          MaterialsStore.selected.files.map(this.createFile)}
         </Card>
       </div>
     );

@@ -26,6 +26,7 @@ class IndexPage extends ProgressPage {
     visibleLogin: false,
     visibleRegister: false,
     visibleUser: false,
+    selectBox: {},
   };
 
   static propTypes = {
@@ -41,12 +42,15 @@ class IndexPage extends ProgressPage {
     WebUIStore.showMaterial = this.onClickBox;
   }
 
-  onClickBox = ({ id, title, description }) => {
+  onClickBox = (box) => {
+    const { id, title, description } = box;
+    MaterialsStore.get(id);
     this.setState({
       chooseBoxId: id,
       title,
       modalContent: description,
       visible: true,
+      selectBox: box,
     });
   };
 
@@ -60,6 +64,10 @@ class IndexPage extends ProgressPage {
   clickDisableFunc = () => {
     message.info('这个功能将在不久之后上线呢');
   };
+
+  createFile = (file, index) => (
+    <a rel="noreferrer noopener" target="_blank" href={file.file}>{`文件${index + 1}`}</a>
+  );
 
 
   render() {
@@ -216,8 +224,10 @@ class IndexPage extends ProgressPage {
               exact
               path="/"
               render={() => (
-                <div className="center-block"
-                     style={{ width: 800, height: 1, backgroundColor: '#2e2e2e', margin: '30px auto' }} />)}
+                <div
+                  className="center-block"
+                  style={{ width: 800, height: 1, backgroundColor: '#2e2e2e', margin: '30px auto' }}
+                />)}
             />
 
             <Route
@@ -330,6 +340,11 @@ class IndexPage extends ProgressPage {
             喜欢的话就赶快收藏吧！<LikeIcon style={{ float: 'none' }} id={this.state.chooseBoxId} />
           </p>
           <div className="html-content" dangerouslySetInnerHTML={{ __html: this.state.modalContent }} />
+
+          <Card title="下载区域">
+            {this.state.selectBox.files &&
+            this.state.selectBox.files.map(this.createFile)}
+          </Card>
         </Modal>
       </div>
     );

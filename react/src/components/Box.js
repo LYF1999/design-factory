@@ -54,7 +54,7 @@ class Box extends React.Component {
   };
 
   onClick = () => {
-    this.props.onClick({ ...this.props.box });
+    this.props.onClick(this.props.box);
   };
 
 

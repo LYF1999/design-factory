@@ -5,7 +5,7 @@ import WebUIStore from '../stores/WebUI';
 import FavoriteObjectStore from '../stores/FavoriteObjectStore';
 
 
-const LikeIcon = ({ id, style }) => {
+const LikeIcon = ({ id, style, onClick }) => {
   const onLick = (e) => {
     WebUIStore.showAddModal(id);
     e.stopPropagation();
@@ -16,9 +16,13 @@ const LikeIcon = ({ id, style }) => {
     ...style,
   };
 
+  const onCancelLike = () => {
+    FavoriteObjectStore.del({ id });
+  }
+
   if (id in FavoriteObjectStore.allFavoriteObject) {
     return (
-      <Icon style={newStyle} type="star" className="pull-right big-icon" />
+      <Icon onClick={onCancelLike} style={newStyle} type="star" className="pull-right big-icon" />
     );
   }
   return (

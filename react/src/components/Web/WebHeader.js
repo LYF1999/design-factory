@@ -15,12 +15,8 @@ import FavoriteCtrlStore from '../../stores/FavoriteCtrlStore';
 
 const FavoriteCtrlModal = observer(({ close, visible }) => {
 
-  const clickBox = ({ id, title, description }) => {
-    WebUiStore.showMaterial({
-      id,
-      title,
-      description
-    })
+  const clickBox = (box) => {
+    WebUiStore.showMaterial(box);
   };
 
   const createBox = box => (
