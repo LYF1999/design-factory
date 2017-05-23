@@ -18,7 +18,7 @@ const LikeIcon = ({ id, style, onClick }) => {
 
   const onCancelLike = () => {
     FavoriteObjectStore.del({ id });
-  }
+  };
 
   if (id in FavoriteObjectStore.allFavoriteObject) {
     return (

@@ -56,16 +56,7 @@ class FavoriteCtrl extends React.Component {
         }}
         style={{ cursor: 'pointer' }}
       >
-        {
-          favoriteCtrl.cover ? (
-            <img
-              alt={favoriteCtrl.name}
-              style={{ display: 'inline-block', width: 200, height: 100 }}
-              src={favoriteCtrl.cover}
-            />
-          ) : (
-            <span style={{ font: 14 }}><Icon style={{ fontSize: 36 }} type="folder" /></span>
-          )}
+        <span style={{ font: 14 }}><Icon style={{ fontSize: 36 }} type="folder" /></span>
         <span className="text-primary" style={{ margin: 15 }}>{favoriteCtrl.name}</span>
       </div>
     </div>
