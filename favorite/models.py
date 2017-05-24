@@ -18,6 +18,6 @@ class FavoriteCtrl(models.Model):
 
 class FavoriteObject(models.Model):
     favorite_ctrl = models.ForeignKey(FavoriteCtrl, verbose_name='收藏夹')
-    material = models.OneToOneField(Material, verbose_name='素材')
+    material = models.ForeignKey(Material, verbose_name='素材')
 
 # Create your models here.
